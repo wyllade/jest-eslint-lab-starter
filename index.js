@@ -1,4 +1,3 @@
-
 // Utility Functions
 
 /**
@@ -7,7 +6,15 @@
  * @returns {string} - The formatted string.
  */
 function capitalizeWords(input) {
-    return input.replace(/\b\w/g, char => char.toUpperCase());
+    if (typeof input !== 'string') {
+        return '';
+    }
+
+    return input
+        .split(' ')
+        .filter(word => word.length > 0)
+        .map(word => word[0].toUpperCase() + word.slice(1))
+        .join(' ');
 }
 
 /**
@@ -16,6 +23,9 @@ function capitalizeWords(input) {
  * @returns {Array} - An array of active user objects.
  */
 function filterActiveUsers(users) {
+    if (!Array.isArray(users)) {
+        return [];
+    }
     return users.filter(user => user.isActive);
 }
 
